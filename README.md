@@ -31,7 +31,14 @@ The system currently supports basic threshold detection. Future versions may int
 
 ## Project Structure
 
-. ├── Core/ # STM32 user and auto-generated code ├── Drivers/ # HAL and CMSIS drivers ├── build/ # CMake output (not committed) ├── .github/workflows/ # CI pipeline ├── .vscode/ # VSCode debugging tasks and config ├── CMakeLists.txt # Main build script ├── MyProject.ioc # STM32CubeMX project configuration └── README.md
+- `Core/` - STM32 user code and auto-generated source files
+- `Drivers/` - HAL and CMSIS drivers
+- `build/` - CMake build output directory (excluded from Git)
+- `.github/workflows/` - GitHub Actions CI workflow configuration
+- `.vscode/` - VSCode debugging and build task configurations
+- `CMakeLists.txt` - Main build script for the STM32 project
+- `MyProject.ioc` - STM32CubeMX project configuration
+- `README.md` - Project overview and documentation
 
 ## CI/CD
 
