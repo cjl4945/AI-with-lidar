@@ -1,4 +1,4 @@
-name: STM32 Build Firmware
+name: Build STM32 Firmware
 
 on:
   push:
@@ -11,16 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install ARM Toolchain
+    - name: Install ARM Toolchain & Build Tools
       run: |
         sudo apt-get update
         sudo apt-get install -y gcc-arm-none-eabi make cmake
 
-    - name: Configure with CMake
+    - name: Configure project with CMake
       run: cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
 
     - name: Build firmware
       run: cmake --build build
+
+    - name: Copy .hex file to artifact directory
+      run: |
+        mkdir -p artifacts
+        find build -name "*.hex" -exec cp {} artifacts/ \;
+
+    - name: Upload .hex as GitHub Actions artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: firmware-hex
+        path: artifacts/*.hex
+
+
+
