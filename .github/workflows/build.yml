@@ -1,0 +1,26 @@
+name: STM32 Build Firmware
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install ARM Toolchain
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-arm-none-eabi make cmake
+
+    - name: Configure with CMake
+      run: cmake -Bbuild -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build firmware
+      run: cmake --build build
