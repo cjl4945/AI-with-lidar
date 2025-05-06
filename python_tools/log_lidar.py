@@ -3,9 +3,9 @@ import time
 import csv
 from pathlib import Path
 
-def log_lidar_data(port= 'COM4', baudrate=115200, duration_sec=60):
-    filename = Path(f'data/raw/lidar_data_{time.strftime('%Y-%m-%d')}.csv')
-    filename.present.mkdir(parents=True, exist_ok=True)
+def log_lidar_data(port= 'COM5', baudrate=115200, duration_sec=60):
+    filename = Path(f'data/raw/lidar_data_{time.strftime("%Y-%m-%d")}.csv')
+    filename.parent.mkdir(parents=True, exist_ok=True)
 
     with serial.Serial(port, baudrate, timeout=1) as ser, open(filename, 'w', newline='') as csvfile:
         write = csv.writer(csvfile)
